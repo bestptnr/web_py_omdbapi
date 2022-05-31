@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MOVIE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="color: #FFFFFF;">MOVIE OMDBI</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+       
+          
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+        <form class="d-flex mt-5" role="search" action="{{ url_for('movie') }}" method="POST">
+            <input class="form-control me-2" type="search" placeholder="Search Movie" aria-label="Search" name="url">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        <div class="d-flex flex-wrap">
+            {% for i in data %}
+            <div class=" m-2">
+                <div class="card" style="width: 18rem; height: 450px;">
+                    <img src="{{ i['Poster'] }}" class="card-img-top" alt="Poster" style="height: 300px;">
+                    <div class="card-body " style="position:relative ;">
+                      <h5 class="card-title">{{ i['Title'] }}</h5>
+                      <form action="">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ i['imdbID'] }}" style="position:absolute;bottom:10px;">
+                            Launch demo modal
+                        </button>
+                      </form>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal{{ i['imdbID'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{ i['Title'] }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <b>POT MOVIE</b>
+                      <p>{{ i['']}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+      
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
